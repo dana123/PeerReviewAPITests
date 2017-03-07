@@ -151,7 +151,7 @@
       <con:resource name="Submission Draf list" path="submission-draft" id="37563e83-b047-4f8d-8475-06a177a89986">
         <con:settings/>
         <con:parameters/>
-        <con:method name="POST" id="4631d94a-8be6-4090-8ce5-d3932d655294" method="POST">
+        <con:resource name="Submission by ProcessId" path="{processId}" id="7c12dc39-662c-4b9e-bb13-0de2a2e730ce"><con:settings/><con:parameters><con:parameter><con:name>processId</con:name><con:value>processId</con:value><con:style>TEMPLATE</con:style><con:default>processId</con:default></con:parameter></con:parameters><con:resource name="Complete Submission" path="submitDraft" id="a76a6395-4fbc-47fe-9a11-7c5198c254b6"><con:settings/><con:parameters/><con:method name="POST" id="0b3785e0-f2c5-4604-880c-6f6b4cb73ec1" method="POST"><con:settings/><con:parameters/><con:request name="Complete Submission" id="d03b4abb-9c1a-4641-86e9-4ff23b134bcd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request>{}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GET" id="f57c34a0-cdb7-45fc-be4f-eaac36b9607f" method="GET"><con:settings/><con:parameters/><con:request name="GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="POST" id="4631d94a-8be6-4090-8ce5-d3932d655294" method="POST">
           <con:settings/>
           <con:parameters/>
           <con:representation type="REQUEST">
@@ -334,7 +334,7 @@ assert jsonSlurper.lastName.contains("Reviewer")</scriptText>
       <con:testStep type="restrequest" name="GET - Users by inexisting role" id="8bdff388-b6b0-4ad3-bd92-ffdec367ccc8">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/user-details-role/{role}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="GET - Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+          <con:restRequest name="GET - Users by inexisting role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -371,7 +371,17 @@ assert jsonSlurper.error == ""</scriptText>
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:properties/>
+  <con:testSuite id="d2b35d8e-8b4e-4371-865e-c8427e095cbb" name="Submission list"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="ffb5c2b2-2af7-49b4-8322-1f0fa7e778cc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Generate Submission ID" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="Generate Submission Id" id="dae11ee8-f172-41ca-93ab-b78831c80ff9"><con:settings/><con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request>{}</con:request><con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri><con:assertion type="GroovyScriptAssertion" id="b84a7a4c-8490-4225-a0a7-a36c965881f3" name="Set ProcessID"><con:configuration><scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())</scriptText></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="9e9c3799-a46a-4009-8a84-68815e749eaf" name="200 Status Code"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="GET Submission list" id="005bec4f-185d-4985-851e-ab7712add2b4"><con:settings/><con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="GET Submission list" id="318108f3-108c-40f0-957b-073c21fc2268" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="21dd9cb2-9ee1-4403-b401-80b98ac5fc07" name="Verify HTTP Status -200"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="4693bbf0-70e2-4497-9fd2-fd300361ec0a" name="Script Assertion"><con:configuration><scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+assert jsonSlurper.size() == 14</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties><con:property><con:name>processId</con:name><con:value>22554</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/>
   <con:wssContainer/>
   <con:oAuth2ProfileContainer/>
   <con:oAuth1ProfileContainer/>
