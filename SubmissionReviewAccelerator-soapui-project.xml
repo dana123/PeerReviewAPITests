@@ -38,7 +38,7 @@
           <con:mediaType>application/json</con:mediaType>
           <con:params/>
         </con:representation>
-        <con:request name="Login using {username} and {password}" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
+        <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:auth="http://praqa.ipm.ixxus.io/auth">auth:Fault</con:element></con:representation><con:request name="Login using {username} and {password}" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -47,12 +47,15 @@
   "username": "${username}",
   "password": "${password}"
 }</con:request>
-          <con:credentials>
+          <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri><con:credentials>
             <con:authType>No Authorization</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
-          <con:parameters/>
+          <con:parameters>
+  <con:entry key="username" value="dana.marian@ixxus.com"/>
+  <con:entry key="password" value="Marian123"/>
+</con:parameters>
           <con:parameterOrder>
             <con:entry>username</con:entry>
             <con:entry>password</con:entry>
@@ -110,13 +113,13 @@
         <con:method name="GET" id="ba9007f8-b6a0-402f-b03a-171674b99637" method="GET">
           <con:settings/>
           <con:parameters/>
-          <con:request name="Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+          <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:role="http://praqa.ipm.ixxus.io/api/user-details-role/role">role:Fault</con:element></con:representation><con:request name="Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
-            <con:credentials>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details-role/role</con:originalUri><con:credentials>
               <con:authType>No Authorization</con:authType>
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
@@ -125,7 +128,7 @@
           </con:request>
         </con:method>
       </con:resource>
-    </con:resource>
+    <con:resource name="Submission Draf list" path="submission-draft" id="37563e83-b047-4f8d-8475-06a177a89986"><con:settings/><con:parameters/><con:method name="POST" id="4631d94a-8be6-4090-8ce5-d3932d655294" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Response</con:element></con:representation><con:request name="Generate Process Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request>{}</con:request><con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="GET" id="6b8a27da-075a-4102-befe-bf035e9b8f75" method="GET"><con:settings/><con:parameters/><con:request name="Get My Submissions list" id="318108f3-108c-40f0-957b-073c21fc2268" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource>
   </con:interface>
   <con:testSuite id="ffb84568-d90d-422e-b8c6-238d6150a089" name="Login and set Global Auth Token">
     <con:settings/>
