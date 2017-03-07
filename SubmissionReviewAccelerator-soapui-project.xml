@@ -83,11 +83,39 @@
           </con:representation>
           <con:request name="User details" id="b28cf12b-b824-4ca3-b3cc-43b122635b92" mediaType="application/json">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${authToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
             <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details</con:originalUri>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:request>
+        </con:method>
+      </con:resource>
+      <con:resource name="Role details" path="user-details-role/{role}" id="b5c8426f-b14e-4c15-90ca-dfc2d204a670">
+        <con:settings/>
+        <con:parameters>
+          <con:parameter>
+            <con:name>role</con:name>
+            <con:value>role</con:value>
+            <con:style>TEMPLATE</con:style>
+            <con:default>role</con:default>
+          </con:parameter>
+        </con:parameters>
+        <con:method name="GET" id="ba9007f8-b6a0-402f-b03a-171674b99637" method="GET">
+          <con:settings/>
+          <con:parameters/>
+          <con:request name="Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
             <con:credentials>
               <con:authType>No Authorization</con:authType>
             </con:credentials>
