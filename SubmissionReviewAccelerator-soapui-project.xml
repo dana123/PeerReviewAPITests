@@ -38,7 +38,13 @@
           <con:mediaType>application/json</con:mediaType>
           <con:params/>
         </con:representation>
-        <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:auth="http://praqa.ipm.ixxus.io/auth">auth:Fault</con:element></con:representation><con:request name="Login using {username} and {password}" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
+        <con:representation type="FAULT">
+          <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+          <con:status>400</con:status>
+          <con:params/>
+          <con:element xmlns:auth="http://praqa.ipm.ixxus.io/auth">auth:Fault</con:element>
+        </con:representation>
+        <con:request name="Login using {username} and {password}" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
           <con:settings>
             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
           </con:settings>
@@ -47,15 +53,16 @@
   "username": "${username}",
   "password": "${password}"
 }</con:request>
-          <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri><con:credentials>
+          <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri>
+          <con:credentials>
             <con:authType>No Authorization</con:authType>
           </con:credentials>
           <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
           <con:jmsPropertyConfig/>
           <con:parameters>
-  <con:entry key="username" value="dana.marian@ixxus.com"/>
-  <con:entry key="password" value="Marian123"/>
-</con:parameters>
+            <con:entry key="username" value="dana.marian@ixxus.com"/>
+            <con:entry key="password" value="Marian123"/>
+          </con:parameters>
           <con:parameterOrder>
             <con:entry>username</con:entry>
             <con:entry>password</con:entry>
@@ -113,13 +120,26 @@
         <con:method name="GET" id="ba9007f8-b6a0-402f-b03a-171674b99637" method="GET">
           <con:settings/>
           <con:parameters/>
-          <con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:role="http://praqa.ipm.ixxus.io/api/user-details-role/role">role:Fault</con:element></con:representation><con:request name="Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+          <con:representation type="FAULT">
+            <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+            <con:status>401</con:status>
+            <con:params/>
+            <con:element xmlns:role="http://praqa.ipm.ixxus.io/api/user-details-role/role">role:Fault</con:element>
+          </con:representation>
+          <con:representation type="RESPONSE">
+            <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+            <con:status>200</con:status>
+            <con:params/>
+            <con:element>Response</con:element>
+          </con:representation>
+          <con:request name="Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
-            <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details-role/role</con:originalUri><con:credentials>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details-role/role</con:originalUri>
+            <con:credentials>
               <con:authType>No Authorization</con:authType>
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
@@ -128,7 +148,62 @@
           </con:request>
         </con:method>
       </con:resource>
-    <con:resource name="Submission Draf list" path="submission-draft" id="37563e83-b047-4f8d-8475-06a177a89986"><con:settings/><con:parameters/><con:method name="POST" id="4631d94a-8be6-4090-8ce5-d3932d655294" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Response</con:element></con:representation><con:request name="Generate Process Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request>{}</con:request><con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="GET" id="6b8a27da-075a-4102-befe-bf035e9b8f75" method="GET"><con:settings/><con:parameters/><con:request name="Get My Submissions list" id="318108f3-108c-40f0-957b-073c21fc2268" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource>
+      <con:resource name="Submission Draf list" path="submission-draft" id="37563e83-b047-4f8d-8475-06a177a89986">
+        <con:settings/>
+        <con:parameters/>
+        <con:method name="POST" id="4631d94a-8be6-4090-8ce5-d3932d655294" method="POST">
+          <con:settings/>
+          <con:parameters/>
+          <con:representation type="REQUEST">
+            <con:mediaType>application/json</con:mediaType>
+            <con:params/>
+          </con:representation>
+          <con:representation type="FAULT">
+            <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+            <con:status>401</con:status>
+            <con:params/>
+            <con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Fault</con:element>
+          </con:representation>
+          <con:representation type="RESPONSE">
+            <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+            <con:status>200</con:status>
+            <con:params/>
+            <con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Response</con:element>
+          </con:representation>
+          <con:request name="Generate Process Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{}</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:request>
+        </con:method>
+        <con:method name="GET" id="6b8a27da-075a-4102-befe-bf035e9b8f75" method="GET">
+          <con:settings/>
+          <con:parameters/>
+          <con:request name="Get My Submissions list" id="318108f3-108c-40f0-957b-073c21fc2268" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:request>
+        </con:method>
+      </con:resource>
+    </con:resource>
   </con:interface>
   <con:testSuite id="ffb84568-d90d-422e-b8c6-238d6150a089" name="Login and set Global Auth Token">
     <con:settings/>
@@ -200,6 +275,95 @@ com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils.globalProperti
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:testSuite id="51db688a-7aa6-4bb2-9360-e672234712f3" name="Get users based on role">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="58495cea-ae9b-4bb8-a1ee-f22bf7e4db9f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Get users having Reviewer role" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="restrequest" name="GET - Users by Reviewer role" id="f7e8338e-f95d-4eb6-860a-01845bdc02cf">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/user-details-role/{role}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="GET - Users by Reviewer role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details-role/role</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="c16f2dbb-17ed-4691-8ca6-7e3ce82be1d9" name="Verify HTTP Status Code (200)">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="GroovyScriptAssertion" id="409d410c-96e2-4b5b-bf9c-0c59f305548e" name="Verify specific Reviewer user is returned">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+
+assert jsonSlurper.size > 1
+assert jsonSlurper.email.contains("soapUI.reviewer@ixxus.com")
+assert jsonSlurper.firstName.contains("SoapUI")
+assert jsonSlurper.lastName.contains("Reviewer")</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <entry key="role" value="Reviewer" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="be73e9be-b516-4ee1-b3d7-1436ea5946b9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Negative- Attempt to get users by inexisting role" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="restrequest" name="GET - Users by inexisting role" id="8bdff388-b6b0-4ad3-bd92-ffdec367ccc8">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/user-details-role/{role}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="GET - Users by role" id="32278632-77e4-4f77-baed-e34d308316fa" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/user-details-role/role</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="65f76018-163f-4bcb-87b4-48988c2b690f" name="Verify HTTP Status Code (400)">
+              <con:configuration>
+                <codes>404</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="GroovyScriptAssertion" id="f1d17575-e974-404b-9c66-adc1266a7eb9" name="Verify error message">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+assert jsonSlurper.error == ""</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <entry key="role" value="Reviewers" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
           </con:restRequest>
         </con:config>
       </con:testStep>
