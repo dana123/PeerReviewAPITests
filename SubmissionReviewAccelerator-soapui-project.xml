@@ -778,19 +778,6 @@ assert jsonSlurper.processId.contains(expectedProcessId)</scriptText>
     </con:testCase>
     <con:properties/>
   </con:testSuite>
-  <con:testSuite id="bd32638b-c538-482b-893a-c6d0e5ee16e4" name="Return Submitted/Draft submissions">
-    <con:settings/>
-    <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="854f4b1b-e0f7-41b9-bb4b-bcc9cdcf4d1e" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Return Submitted (Completed) submissions" searchProperties="true">
-      <con:settings/>
-      <con:properties/>
-    </con:testCase>
-    <con:testCase id="e3992b97-2d14-4003-9d4d-b83b648c62b2" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Return Draft submissions" searchProperties="true">
-      <con:settings/>
-      <con:properties/>
-    </con:testCase>
-    <con:properties/>
-  </con:testSuite>
   <con:properties/>
   <con:wssContainer/>
   <con:oAuth2ProfileContainer/>
