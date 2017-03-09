@@ -257,11 +257,18 @@
         <con:resource name="Draft/Submitted submissions" path="" id="853454dc-a8fc-49f3-bea6-973dc6532b89">
           <con:settings/>
           <con:parameters>
-            <con:parameter required="true">
+            <con:parameter>
               <con:name>historic</con:name>
-              <con:value>true</con:value>
+              <con:value/>
               <con:style>QUERY</con:style>
-              <con:default>true</con:default>
+              <con:default/>
+              <con:description xsi:nil="true"/>
+            </con:parameter>
+            <con:parameter>
+              <con:name>filter</con:name>
+              <con:value/>
+              <con:style>QUERY</con:style>
+              <con:default/>
               <con:description xsi:nil="true"/>
             </con:parameter>
           </con:parameters>
@@ -273,6 +280,12 @@
               <con:status>500</con:status>
               <con:params/>
               <con:element xmlns:sub="http://praqa.ipm.ixxus.io/api/submission-draft">sub:Fault</con:element>
+            </con:representation>
+            <con:representation type="RESPONSE">
+              <con:mediaType>application/json;charset=UTF-8</con:mediaType>
+              <con:status>200</con:status>
+              <con:params/>
+              <con:element>Response</con:element>
             </con:representation>
             <con:request name="Submitted/Draft submissions" id="dc9eca92-2ad1-4201-ba4f-ff7c2f1a2fbe" mediaType="application/json">
               <con:settings>
@@ -286,9 +299,12 @@
               </con:credentials>
               <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
               <con:jmsPropertyConfig/>
-              <con:parameters/>
+              <con:parameters>
+                <entry key="historic" value="true" xmlns="http://eviware.com/soapui/config"/>
+              </con:parameters>
               <con:parameterOrder>
                 <con:entry>historic</con:entry>
+                <con:entry>filter</con:entry>
               </con:parameterOrder>
             </con:request>
           </con:method>
@@ -880,22 +896,22 @@ assert jsonSlurper.submissionState == "SUBMITTED"</scriptText>
           </con:restRequest>
         </con:config>
       </con:testStep>
-      <con:testStep type="restrequest" name="GET - Submitted/Draft submissions" id="8e18b6bb-f8d7-41ce-a6ca-694ae7569e65">
+      <con:testStep type="restrequest" name="GET - Submitted submissions" id="660833e5-5ccd-4edc-bf45-912ea276c896">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="GET - Submitted/Draft submissions" id="dc9eca92-2ad1-4201-ba4f-ff7c2f1a2fbe" mediaType="application/json">
+          <con:restRequest name="GET - Submitted submissions" id="dc9eca92-2ad1-4201-ba4f-ff7c2f1a2fbe" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
             <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri>
-            <con:assertion type="Valid HTTP Status Codes" id="2e356665-bceb-4de2-aea4-5dbfd7cd0fb0" name="Verify HTTP Status Code (200)">
+            <con:assertion type="Valid HTTP Status Codes" id="b3ec2923-6b1e-44bb-9cef-f93391ff8a30" name="Validate HTTP Stats Code (200)">
               <con:configuration>
                 <codes>200</codes>
               </con:configuration>
             </con:assertion>
-            <con:assertion type="GroovyScriptAssertion" id="c647cb02-0413-4a0c-b6f4-009ea18baa12" name="Script Assertion">
+            <con:assertion type="GroovyScriptAssertion" id="b4e7ac04-dd26-4598-896d-b1b7e04d6af9" name="Verify Expected Draft submission is returned">
               <con:configuration>
                 <scriptText>import groovy.json.JsonSlurper
 def ResponseMessage = messageExchange.response.responseContent
@@ -903,7 +919,9 @@ def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
 
 assert !(jsonSlurper.isEmpty())
 def expectedProcessId = context.testCase.getPropertyValue("processId")
+log.info expectedProcessId
 assert jsonSlurper.processId.contains(expectedProcessId)
+
 for (i=0; i&lt;jsonSlurper.size(); i++){
 	assert jsonSlurper[i].submissionState == "SUBMITTED"	
 }</scriptText>
@@ -914,7 +932,9 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
-            <con:parameters/>
+            <con:parameters>
+              <entry key="historic" value="true" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
             <con:parameterOrder>
               <con:entry>historic</con:entry>
             </con:parameterOrder>
@@ -924,7 +944,7 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
       <con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>7505</con:value>
+          <con:value>7649</con:value>
         </con:property>
       </con:properties>
     </con:testCase>
@@ -1214,6 +1234,225 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
       </con:properties>
     </con:testCase>
     <con:properties/>
+  </con:testSuite>
+  <con:testSuite id="1f10052c-08ad-45d1-a965-d492a2a997bd" name="Search for Submitted Submissions">
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="9ab99200-53b9-423d-a0aa-536c7209b2e6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Search for Submission by name" searchProperties="true">
+      <con:settings/>
+      <con:testStep type="restrequest" name="POST Generate Submission Id" id="8c5d271b-ca0c-4bcc-82e2-3b74c17e8c24">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="POST Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{}</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri>
+            <con:assertion type="GroovyScriptAssertion" id="b84a7a4c-8490-4225-a0a7-a36c965881f3" name="Set ProcessID">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Valid HTTP Status Codes" id="9e9c3799-a46a-4009-8a84-68815e749eaf" name="200 Status Code">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="GroovyScriptAssertion" id="41f5de6d-36cc-483e-9a3c-f5f2a4d48940" name="Verify Submission State">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+
+assert jsonSlurper.submissionState == "DRAFT"
+assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters/>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="GET Submission by ProcessId" id="ee621202-29da-4ebe-bf86-7bfd1dc8e270">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Copy of GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/22554</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="b1edb158-9614-481d-963a-4f108dcc2eba" name="Verify HTTP Status Codes-200">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="POST Update Submission" id="eee0ff5a-6cfd-45f2-bb66-91315ec35dc5">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{
+   "areaOfResearch": "Health",
+   "funding": "2015",
+   "fundingOrganization": "Ixxus",
+   "articleType": "Article",
+   "longTitle": "Benefits of rice for health",
+   "submissionDate": 1488980445730,
+   "shortTitle": "Is rice healthy?",
+   "journal": "Rice benefits",
+    "submittingAuthor": {
+    "id": "dana.marian@ixxus.com",
+    "firstName": "Dana",
+    "lastName": "Marian",
+    "email": "dana.marian@ixxus.com"
+    }
+   }</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/100</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="2d1b9a51-b53c-4189-b9f3-f6105c7358d8" name="Verify HTTP Status Codes-200">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="POST Upload File" id="8d1263be-61de-4aaf-90ce-91742bf137bc">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/upload/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Copy of POST Upload File" id="0c77ebf9-4036-400a-9c0f-b37b6db6f962" mediaType="multipart/form-data" postQueryString="true">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="RecordRequestRepresentations">true</con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request/>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/upload/2594</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="595a8203-6f19-4e9f-a530-c7341db986fc" name="Valid HTTP Status Codes">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:attachment>
+              <con:name>text.html</con:name>
+              <con:contentType>text/html</con:contentType>
+              <con:contentId>text.html</con:contentId>
+              <con:url>C:/Users/danapanican/Desktop/text.html</con:url>
+              <con:id>301df096-9238-4bb9-b2b8-f26fe5e3968a</con:id>
+            </con:attachment>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <con:entry key="abstract" value="White rice is considered a nutritionally inferior &quot;refined grain&quot; because its bran and germ are removed during the milling process, which strips away B vitamins, iron and fiber."/>
+              <con:entry key="authors" value="Dana, Ioana, Flaviu"/>
+              <con:entry key="title" value="Exercise &amp; Nutrition"/>
+              <con:entry key="processId" value="${#TestCase#processId}"/>
+              <con:entry key="description" value="Rice (technically a seed) is a staple food"/>
+              <con:entry key="file" value="file:C:/Users/danapanican/Desktop/text.html"/>
+              <con:entry key="rights" value="Copyright"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>processId</con:entry>
+              <con:entry>file</con:entry>
+              <con:entry>title</con:entry>
+              <con:entry>description</con:entry>
+              <con:entry>abstract</con:entry>
+              <con:entry>authors</con:entry>
+              <con:entry>rights</con:entry>
+            </con:parameterOrder>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="restrequest" name="POST Complete Submission" id="1f550d8a-c793-4a4e-ae04-f94cdfb9f638">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}/submitDraft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="POST Complete Submission" id="d03b4abb-9c1a-4641-86e9-4ff23b134bcd" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{
+	"abstractStr": "&lt;h2>Benefits of Health&lt;/h2>"
+}</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/100/submitDraft</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="57710201-da38-4dfa-91b5-c73eac464dab" name="Valid HTTP Status Codes">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
+            </con:parameters>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
+      <con:properties>
+        <con:property>
+          <con:name>processId</con:name>
+          <con:value>7673</con:value>
+        </con:property>
+      </con:properties>
+    </con:testCase>
+    <con:testCase id="96d1fa1a-b12f-4860-8316-6e083629c840" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Negative: Attempt to search for submission by Journal" searchProperties="true">
+      <con:settings/>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="ea5f066c-bc6b-4d71-a27f-d8c5e755c8f4" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Negative: Attempt to search for submission by submitting author" searchProperties="true">
+      <con:settings/>
+      <con:properties/>
+    </con:testCase>
+    <con:properties>
+      <con:property>
+        <con:name>longTitle</con:name>
+        <con:value>Benefits of rice for health-7504</con:value>
+      </con:property>
+    </con:properties>
+    <con:setupScript>String random1 = org.apache.commons.lang.RandomStringUtils.random(4, false, true)
+String longTitle = "Benefits of rice for health" + "-" + random1</con:setupScript>
   </con:testSuite>
   <con:properties/>
   <con:wssContainer/>
