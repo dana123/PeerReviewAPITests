@@ -563,7 +563,7 @@
             <con:params/>
             <con:element>h2</con:element>
           </con:representation>
-          <con:request name="Get Content of abstract" id="7b4f5e80-24e7-4604-bfe8-d07fe84cd316" mediaType="application/json">
+          <con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Get Content of abstract" id="7b4f5e80-24e7-4604-bfe8-d07fe84cd316" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -1279,20 +1279,20 @@ assert jsonSlurper.submittingAuthor.affiliation.county == "Cluj"</scriptText></c
               <con:name>text.html</con:name>
               <con:contentType>text/html</con:contentType>
               <con:contentId>text.html</con:contentId>
-              <con:url>C:/Users/danapanican/Desktop/text.html</con:url>
+              <con:part xsi:nil="true"/><con:url>${projectDir}/Submission/text.html</con:url>
               <con:id>301df096-9238-4bb9-b2b8-f26fe5e3968a</con:id>
             </con:attachment>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <con:entry key="abstract" value="White rice is considered a nutritionally inferior &quot;refined grain&quot; because its bran and germ are removed during the milling process, which strips away B vitamins, iron and fiber."/>
-              <con:entry key="authors" value="Dana, Ioana, Flaviu"/>
-              <con:entry key="title" value="Exercise &amp; Nutrition"/>
-              <con:entry key="processId" value="${#TestCase#processId}"/>
-              <con:entry key="description" value="Rice (technically a seed) is a staple food"/>
-              <con:entry key="file" value="file:C:/Users/danapanican/Desktop/text.html"/>
-              <con:entry key="rights" value="Copyright"/>
-            </con:parameters>
+  <con:entry key="abstract" value="White rice is considered a nutritionally inferior &quot;refined grain&quot; because its bran and germ are removed during the milling process, which strips away B vitamins, iron and fiber."/>
+  <con:entry key="authors" value="Dana, Ioana, Flaviu"/>
+  <con:entry key="title" value="Exercise &amp; Nutrition"/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="file" value="file:${projectDir}/Submission/text.html"/>
+  <con:entry key="description" value="Rice (technically a seed) is a staple food"/>
+  <con:entry key="rights" value="Copyright"/>
+</con:parameters>
             <con:parameterOrder>
               <con:entry>processId</con:entry>
               <con:entry>file</con:entry>
@@ -1374,8 +1374,7 @@ assert jsonSlurper.submissionState == "SUBMITTED"</scriptText>
               </con:configuration>
             </con:assertion>
             <con:assertion type="GroovyScriptAssertion" id="28800813-a4e9-47b2-adfc-612b336a331c" name="Script Assertion">
-              <con:configuration>
-                <scriptText>import groovy.json.JsonSlurper
+              <con:configuration><scriptText>import groovy.json.JsonSlurper
 def ResponseMessage = messageExchange.response.responseContent
 def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
 
@@ -1383,9 +1382,9 @@ assert !(jsonSlurper.isEmpty())
 
 def abs = jsonSlurper.abstractUrl.toString()
 def extractInts = abs.findAll( /\d+/ )*.toInteger()
-
-//context.testCase.setPropertyValue("abstractId", extractInts.)</scriptText>
-              </con:configuration>
+//def a = extractInts.setCharAt[1,2];
+//log.info(a)
+//context.testCase.setPropertyValue("abstractId", extractInts)</scriptText></con:configuration>
             </con:assertion>
             <con:credentials>
               <con:authType>No Authorization</con:authType>
@@ -1432,21 +1431,19 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
-            <con:parameters>
-              <entry key="contentId" value="59" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
+            <con:parameters><entry key="contentId" value="${#TestSuite#abstractId}" xmlns="http://eviware.com/soapui/config"/></con:parameters>
           </con:restRequest>
         </con:config>
       </con:testStep><con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>7893</con:value>
+          <con:value>7987</con:value>
         </con:property>
         <con:property>
           <con:name>abstractId</con:name>
-          <con:value>http://praqa.ipm.ixxus.io/api/content/59</con:value>
+          <con:value>[85]</con:value>
         </con:property>
-      <con:property><con:name>shortTitle</con:name><con:value>Is Rice Healthy?-0747</con:value></con:property></con:properties>
+      <con:property><con:name>shortTitle</con:name><con:value>Is Rice Healthy?-3923</con:value></con:property></con:properties>
     </con:testCase>
     <con:properties/>
   </con:testSuite>
