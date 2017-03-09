@@ -3,8 +3,8 @@
   <con:settings/>
   <con:interface xsi:type="con:RestService" id="fa67d293-575e-4bf5-91a0-76e79a381b78" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://praqa.ipm.ixxus.io" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <con:settings/>
-    <con:definitionCache type="TEXT" rootPart=""/>
-    <con:endpoints>
+    
+    <con:definitionCache type="TEXT" rootPart=""/><con:endpoints>
       <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
     </con:endpoints>
     <con:resource name="Auth" path="/auth" id="58c35b2f-6a1d-4688-9339-39071e210c0b">
@@ -160,7 +160,7 @@
               <con:style>TEMPLATE</con:style>
               <con:default>processId</con:default>
             </con:parameter>
-          </con:parameters>
+          <con:parameter><con:name>shortTitle</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>journal</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>areaOfResearch</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>funding</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>fundingOrganization</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>articleType</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>longTitle</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>id</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>firstName</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>lastName</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>email</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>institution</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>department</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter><con:parameter><con:name>county</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters>
           <con:resource name="Complete Submission" path="submitDraft" id="a76a6395-4fbc-47fe-9a11-7c5198c254b6">
             <con:settings/>
             <con:parameters/>
@@ -187,8 +187,23 @@
                 </con:credentials>
                 <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
                 <con:jmsPropertyConfig/>
-                <con:parameters/>
-              </con:request>
+                <con:parameters>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+              <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:request>
             </con:method>
           </con:resource>
           <con:method name="GET" id="f57c34a0-cdb7-45fc-be4f-eaac36b9607f" method="GET">
@@ -217,8 +232,23 @@
               </con:credentials>
               <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
               <con:jmsPropertyConfig/>
-              <con:parameters/>
-            </con:request>
+              <con:parameters>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+            <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:request>
           </con:method>
           <con:method name="POST" id="f4f8279b-7a1f-4d1e-a59c-db5617c98d9f" method="POST">
             <con:settings/>
@@ -244,14 +274,45 @@
                 <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
               </con:settings>
               <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
-              <con:request>{ "shortTitle": "Title"}</con:request>
-              <con:credentials>
+              <con:request>{
+   "shortTitle": "${shortTitle}",
+   "longTitle": "${longTitle}",
+   "journal": "${journal}",
+   "areaOfResearch": "${areaOfResearch}",
+   "funding": "${funding}",
+   "fundingOrganization": "${fundingOrganization}",
+   "articleType": "${articleType}",
+    "submittingAuthor": {
+    "id": "${id}",
+    "firstName": "${firstName}",
+    "lastName": "${lastName}",
+    "email": "${email}",
+     "affiliation":       {
+         "id": 38,
+         "organization": "${fundingOrganization}",
+         "institution": "${institution}",
+         "department": "${department}",
+         "country": "Romania",
+         "county": "${county}",
+         "handler": {},
+         "hibernateLazyInitializer": {}
+      }
+    }
+}</con:request>
+              <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/processId</con:originalUri><con:credentials>
                 <con:authType>No Authorization</con:authType>
               </con:credentials>
               <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
               <con:jmsPropertyConfig/>
-              <con:parameters/>
-            </con:request>
+              <con:parameters>
+  <con:entry key="fundingOrganization" value="Ixxus"/>
+  <con:entry key="funding" value="2017"/>
+  <con:entry key="county" value="Cluj"/>
+  <con:entry key="department" value="QA"/>
+  <con:entry key="articleType" value="Review Article"/>
+  <con:entry key="institution" value="Ixxus Office"/>
+</con:parameters>
+            <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>longTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:request>
           </con:method>
         </con:resource>
         <con:resource name="Draft/Submitted submissions" path="" id="853454dc-a8fc-49f3-bea6-973dc6532b89">
@@ -690,7 +751,10 @@ assert jsonSlurper.error == ""</scriptText>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="ffb5c2b2-2af7-49b4-8322-1f0fa7e778cc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Generate Submission ID and verify Draft/Submitted submission is returned as expected" searchProperties="true">
       <con:settings/>
-      <con:testStep type="restrequest" name="Generate Submission Id" id="dae11ee8-f172-41ca-93ab-b78831c80ff9">
+      <con:testStep type="groovy" name="Set random Short Title" id="03aa86b2-7520-4177-a45e-a9c590271a59"><con:settings/><con:config><script>String random1 = org.apache.commons.lang.RandomStringUtils.random(4, false, true)
+
+context.testCase.setPropertyValue("shortTitle","Is Rice Healthy?" + "-" + random1)</script></con:config></con:testStep>
+      <con:testStep type="restrequest" name="POST Generate Submission Id" id="dae11ee8-f172-41ca-93ab-b78831c80ff9">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
@@ -781,6 +845,7 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
           </con:restRequest>
         </con:config>
       </con:testStep>
+      
       <con:testStep type="restrequest" name="GET Submission by ProcessId" id="10924466-abc8-4fb9-a463-f649c4593c22">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -802,37 +867,85 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
-      <con:testStep type="restrequest" name="POST Update Submission" id="df454bae-a0b0-4a5d-9aed-67cd53d6505a">
-        <con:settings/>
-        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
-            <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
-            </con:settings>
-            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
-            <con:request>{ "shortTitle": "Title"}</con:request>
-            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/100</con:originalUri>
-            <con:assertion type="Valid HTTP Status Codes" id="2d1b9a51-b53c-4189-b9f3-f6105c7358d8" name="Verify HTTP Status Codes-200">
-              <con:configuration>
-                <codes>200</codes>
-              </con:configuration>
-            </con:assertion>
-            <con:credentials>
-              <con:authType>No Authorization</con:authType>
-            </con:credentials>
-            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-            <con:jmsPropertyConfig/>
-            <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
-        </con:config>
-      </con:testStep>
+      <con:testStep type="restrequest" name="POST Update Submission" id="440c8d49-1aea-47b1-8073-7a69ef24d59b"><con:settings/><con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
+              <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              </con:settings>
+              <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+              <con:request>{
+   "shortTitle": "${shortTitle}",
+   "longTitle": "${longTitle}",
+   "journal": "${journal}",
+   "areaOfResearch": "${areaOfResearch}",
+   "funding": "${funding}",
+   "fundingOrganization": "${fundingOrganization}",
+   "articleType": "${articleType}",
+    "submittingAuthor": {
+    "id": "${id}",
+    "firstName": "${firstName}",
+    "lastName": "${lastName}",
+    "email": "${email}",
+     "affiliation":       {
+         "id": 38,
+         "organization": "${fundingOrganization}",
+         "institution": "${institution}",
+         "department": "${department}",
+         "country": "Romania",
+         "county": "${county}",
+         "handler": {},
+         "hibernateLazyInitializer": {}
+      }
+    }
+}</con:request>
+              <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/processId</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="3f2e5fa9-757c-4b71-b233-e3a64becd008" name="Valid HTTP Status Codes-200"><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="49a73e4f-07f4-4bb1-bd03-ad663b24b21c" name="Verify information fields"><con:configuration><scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+
+assert jsonSlurper.shortTitle == context.testCase.getPropertyValue("shortTitle")
+assert jsonSlurper.funding == "2017"
+assert jsonSlurper.fundingOrganization == "Ixxus"
+assert jsonSlurper.articleType == "Review Article"
+assert jsonSlurper.submittingAuthor.affiliation.organization == "Ixxus"
+assert jsonSlurper.submittingAuthor.affiliation.institution == "Ixxus Office"
+assert jsonSlurper.submittingAuthor.affiliation.department == "QA"
+assert jsonSlurper.submittingAuthor.affiliation.country == "Romania"
+assert jsonSlurper.submittingAuthor.affiliation.county == "Cluj"</scriptText></con:configuration></con:assertion><con:credentials>
+                <con:authType>No Authorization</con:authType>
+              </con:credentials>
+              <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+              <con:jmsPropertyConfig/>
+              <con:parameters>
+  <con:entry key="fundingOrganization" value="Ixxus"/>
+  <con:entry key="funding" value="2017"/>
+  <con:entry key="county" value="Cluj"/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="shortTitle" value="${#TestCase#shortTitle}"/>
+  <con:entry key="department" value="QA"/>
+  <con:entry key="articleType" value="Review Article"/>
+  <con:entry key="institution" value="Ixxus Office"/>
+</con:parameters>
+            <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>longTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep>
       <con:testStep type="restrequest" name="POST Complete Submission" id="6f4233d2-24c4-4a53-9128-f0e6cacfb9d2">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}/submitDraft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -854,9 +967,23 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
       <con:testStep type="restrequest" name="GET Submission after Complete the Submission" id="87e916f1-4bca-475d-8d30-7f950c826072">
@@ -891,12 +1018,25 @@ assert jsonSlurper.submissionState == "SUBMITTED"</scriptText>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
-      </con:testStep>
-      <con:testStep type="restrequest" name="GET - Submitted submissions" id="660833e5-5ccd-4edc-bf45-912ea276c896">
+      </con:testStep><con:testStep type="restrequest" name="GET - Submitted submissions" id="660833e5-5ccd-4edc-bf45-912ea276c896">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="GET - Submitted submissions" id="dc9eca92-2ad1-4201-ba4f-ff7c2f1a2fbe" mediaType="application/json">
@@ -940,8 +1080,7 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
             </con:parameterOrder>
           </con:restRequest>
         </con:config>
-      </con:testStep>
-      <con:properties>
+      </con:testStep><con:properties>
         <con:property>
           <con:name>processId</con:name>
           <con:value>7649</con:value>
@@ -955,6 +1094,9 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="36a113af-7c18-485c-ad6f-8ada9ff622a8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Generate Submission ID and verify Draft/Submitted submission is returned as expected" searchProperties="true">
       <con:settings/>
+      <con:testStep type="groovy" name="Set a random ShortTitle" id="55149489-b158-4d8f-aa5a-e053ce9e08f5"><con:settings/><con:config><script>String random1 = org.apache.commons.lang.RandomStringUtils.random(4, false, true)
+
+context.testCase.setPropertyValue("shortTitle","Is Rice Healthy?" + "-" + random1)</script></con:config></con:testStep>
       <con:testStep type="restrequest" name="POST Generate Submission Id" id="9b5fd843-2757-4030-a865-77f1e417ade9">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -966,14 +1108,12 @@ for (i=0; i&lt;jsonSlurper.size(); i++){
             <con:request>{}</con:request>
             <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft</con:originalUri>
             <con:assertion type="GroovyScriptAssertion" id="b84a7a4c-8490-4225-a0a7-a36c965881f3" name="Set ProcessID">
-              <con:configuration>
-                <scriptText>import groovy.json.JsonSlurper
+              <con:configuration><scriptText>import groovy.json.JsonSlurper
 def ResponseMessage = messageExchange.response.responseContent
 def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
 
 assert !(jsonSlurper.isEmpty())
-context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())</scriptText>
-              </con:configuration>
+context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())</scriptText></con:configuration>
             </con:assertion>
             <con:assertion type="Valid HTTP Status Codes" id="9e9c3799-a46a-4009-8a84-68815e749eaf" name="200 Status Code">
               <con:configuration>
@@ -981,16 +1121,14 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
               </con:configuration>
             </con:assertion>
             <con:assertion type="GroovyScriptAssertion" id="41f5de6d-36cc-483e-9a3c-f5f2a4d48940" name="Verify Submission State">
-              <con:configuration>
-                <scriptText>import groovy.json.JsonSlurper
+              <con:configuration><scriptText>import groovy.json.JsonSlurper
 def ResponseMessage = messageExchange.response.responseContent
 def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
 
 assert !(jsonSlurper.isEmpty())
 
 assert jsonSlurper.submissionState == "DRAFT"
-assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
-              </con:configuration>
+assert jsonSlurper.humanReadableId.contains("SR")</scriptText></con:configuration>
             </con:assertion>
             <con:credentials>
               <con:authType>No Authorization</con:authType>
@@ -1022,9 +1160,23 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
       <con:testStep type="restrequest" name="POST Update Submission" id="84889ab0-dbe7-41ef-9214-aa95acc01658">
@@ -1037,18 +1189,27 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{
    "areaOfResearch": "Health",
-   "funding": "2015",
-   "fundingOrganization": "Ixxus",
-   "articleType": "Article",
+   "funding": "${funding}",
+   "fundingOrganization": "${fundingOrganization}",
+   "articleType": "${articleType}",
    "longTitle": "Benefits of rice for health",
-   "submissionDate": 1488980445730,
-   "shortTitle": "Is rice healthy?",
+   "shortTitle": "${shortTitle}",
    "journal": "Rice benefits",
     "submittingAuthor": {
     "id": "dana.marian@ixxus.com",
     "firstName": "Dana",
     "lastName": "Marian",
-    "email": "dana.marian@ixxus.com"
+    "email": "dana.marian@ixxus.com",    
+     "affiliation":       {
+         "id": 38,
+         "organization": "Ixxus",
+         "institution": "Ixxus Office",
+         "department": "QA",
+         "country": "Romania",
+         "county": "Cluj",
+         "handler": {},
+         "hibernateLazyInitializer": {}
+      }
     }
    }</con:request>
             <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/100</con:originalUri>
@@ -1057,15 +1218,42 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
                 <codes>200</codes>
               </con:configuration>
             </con:assertion>
-            <con:credentials>
+            <con:assertion type="GroovyScriptAssertion" id="a6f97d61-4655-448c-89a4-382add4d1e69" name="Verify information fields"><con:configuration><scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+
+assert jsonSlurper.shortTitle == context.testCase.getPropertyValue("shortTitle")
+assert jsonSlurper.funding == "2017"
+assert jsonSlurper.fundingOrganization == "Ixxus"
+assert jsonSlurper.articleType == "Review Article"
+assert jsonSlurper.submittingAuthor.affiliation.organization == "Ixxus"
+assert jsonSlurper.submittingAuthor.affiliation.institution == "Ixxus Office"
+assert jsonSlurper.submittingAuthor.affiliation.department == "QA"
+assert jsonSlurper.submittingAuthor.affiliation.country == "Romania"
+assert jsonSlurper.submittingAuthor.affiliation.county == "Cluj"</scriptText></con:configuration></con:assertion><con:credentials>
               <con:authType>No Authorization</con:authType>
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value="Ixxus"/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value="2017"/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="shortTitle" value="${#TestCase#shortTitle}"/>
+  <con:entry key="email" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value="Review Article"/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
       <con:testStep type="restrequest" name="POST Upload File" id="ca521ed8-5c49-4dbd-ab27-36dd4d32de95">
@@ -1140,9 +1328,23 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
       <con:testStep type="restrequest" name="GET Submission after Complete the Submission" id="c4e63128-ce95-4862-a56a-21eaf3c6cb77">
@@ -1191,9 +1393,23 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
       <con:testStep type="restrequest" name="GET Content of abstract" id="dec3f407-f626-44fa-a411-22bfd34807d9">
@@ -1221,17 +1437,16 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
             </con:parameters>
           </con:restRequest>
         </con:config>
-      </con:testStep>
-      <con:properties>
+      </con:testStep><con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>2670</con:value>
+          <con:value>7893</con:value>
         </con:property>
         <con:property>
           <con:name>abstractId</con:name>
           <con:value>http://praqa.ipm.ixxus.io/api/content/59</con:value>
         </con:property>
-      </con:properties>
+      <con:property><con:name>shortTitle</con:name><con:value>Is Rice Healthy?-0747</con:value></con:property></con:properties>
     </con:testCase>
     <con:properties/>
   </con:testSuite>
@@ -1240,6 +1455,9 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="9ab99200-53b9-423d-a0aa-536c7209b2e6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Search for Submission by name" searchProperties="true">
       <con:settings/>
+      <con:testStep type="groovy" name="Set a random ShortTitle" id="821aa51f-0c97-4fde-8d03-ae844b3b8f70"><con:settings/><con:config><script>String random1 = org.apache.commons.lang.RandomStringUtils.random(4, false, true)
+
+context.testCase.setPropertyValue("shortTitle","Is Rice Healthy?" + "-" + random1)</script></con:config></con:testStep>
       <con:testStep type="restrequest" name="POST Generate Submission Id" id="8c5d271b-ca0c-4bcc-82e2-3b74c17e8c24">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -1289,7 +1507,7 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
       <con:testStep type="restrequest" name="GET Submission by ProcessId" id="ee621202-29da-4ebe-bf86-7bfd1dc8e270">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="Copy of GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json">
+          <con:restRequest name="GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -1307,56 +1525,76 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="shortTitle" value="${#TestCase#shortTitle}"/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
       </con:testStep>
-      <con:testStep type="restrequest" name="POST Update Submission" id="eee0ff5a-6cfd-45f2-bb66-91315ec35dc5">
-        <con:settings/>
-        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
-            <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
-            </con:settings>
-            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
-            <con:request>{
-   "areaOfResearch": "Health",
-   "funding": "2015",
-   "fundingOrganization": "Ixxus",
-   "articleType": "Article",
-   "longTitle": "Benefits of rice for health",
-   "submissionDate": 1488980445730,
-   "shortTitle": "Is rice healthy?",
-   "journal": "Rice benefits",
+      
+      <con:testStep type="restrequest" name="POST Update Submission" id="5a82f451-8ac8-4f67-8ac3-868195e0a8ab"><con:settings/><con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
+              <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              </con:settings>
+              <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+              <con:request>{
+   "shortTitle": "${shortTitle}",
+   "longTitle": "${longTitle}",
+   "journal": "${journal}",
+   "areaOfResearch": "${areaOfResearch}",
+   "funding": "${funding}",
+   "fundingOrganization": "${fundingOrganization}",
+   "articleType": "${articleType}",
     "submittingAuthor": {
-    "id": "dana.marian@ixxus.com",
-    "firstName": "Dana",
-    "lastName": "Marian",
-    "email": "dana.marian@ixxus.com"
+    "id": "${id}",
+    "firstName": "${firstName}",
+    "lastName": "${lastName}",
+    "email": "${email}",
+     "affiliation":       {
+         "id": 38,
+         "organization": "${fundingOrganization}",
+         "institution": "${institution}",
+         "department": "${department}",
+         "country": "Romania",
+         "county": "${county}",
+         "handler": {},
+         "hibernateLazyInitializer": {}
+      }
     }
-   }</con:request>
-            <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/100</con:originalUri>
-            <con:assertion type="Valid HTTP Status Codes" id="2d1b9a51-b53c-4189-b9f3-f6105c7358d8" name="Verify HTTP Status Codes-200">
-              <con:configuration>
-                <codes>200</codes>
-              </con:configuration>
-            </con:assertion>
-            <con:credentials>
-              <con:authType>No Authorization</con:authType>
-            </con:credentials>
-            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-            <con:jmsPropertyConfig/>
-            <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
-        </con:config>
-      </con:testStep>
+}</con:request>
+              <con:originalUri>http://praqa.ipm.ixxus.io/api/submission-draft/processId</con:originalUri><con:credentials>
+                <con:authType>No Authorization</con:authType>
+              </con:credentials>
+              <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+              <con:jmsPropertyConfig/>
+              <con:parameters>
+  <con:entry key="fundingOrganization" value="Ixxus"/>
+  <con:entry key="funding" value="2017"/>
+  <con:entry key="shortTitle" value="${#TestCase#shortTitle}"/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="county" value="Cluj"/>
+  <con:entry key="department" value="QA"/>
+  <con:entry key="articleType" value="Review Article"/>
+  <con:entry key="institution" value="Ixxus Office"/>
+</con:parameters>
+            <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>longTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep>
       <con:testStep type="restrequest" name="POST Upload File" id="8d1263be-61de-4aaf-90ce-91742bf137bc">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/upload/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="Copy of POST Upload File" id="0c77ebf9-4036-400a-9c0f-b37b6db6f962" mediaType="multipart/form-data" postQueryString="true">
+          <con:restRequest name="POST Upload File" id="0c77ebf9-4036-400a-9c0f-b37b6db6f962" mediaType="multipart/form-data" postQueryString="true">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
               <con:setting id="RecordRequestRepresentations">true</con:setting>
@@ -1401,8 +1639,7 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             </con:parameterOrder>
           </con:restRequest>
         </con:config>
-      </con:testStep>
-      <con:testStep type="restrequest" name="POST Complete Submission" id="1f550d8a-c793-4a4e-ae04-f94cdfb9f638">
+      </con:testStep><con:testStep type="restrequest" name="POST Complete Submission" id="1f550d8a-c793-4a4e-ae04-f94cdfb9f638">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}/submitDraft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Complete Submission" id="d03b4abb-9c1a-4641-86e9-4ff23b134bcd" mediaType="application/json" postQueryString="false">
@@ -1425,12 +1662,25 @@ assert jsonSlurper.humanReadableId.contains("SR")</scriptText>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
-              <entry key="processId" value="${#TestCase#processId}" xmlns="http://eviware.com/soapui/config"/>
-            </con:parameters>
-          </con:restRequest>
+  <con:entry key="fundingOrganization" value=""/>
+  <con:entry key="lastName" value=""/>
+  <con:entry key="funding" value=""/>
+  <con:entry key="processId" value="${#TestCase#processId}"/>
+  <con:entry key="department" value=""/>
+  <con:entry key="areaOfResearch" value=""/>
+  <con:entry key="journal" value=""/>
+  <con:entry key="id" value=""/>
+  <con:entry key="county" value=""/>
+  <con:entry key="email" value=""/>
+  <con:entry key="shortTitle" value=""/>
+  <con:entry key="longTitle" value=""/>
+  <con:entry key="firstName" value=""/>
+  <con:entry key="articleType" value=""/>
+  <con:entry key="institution" value=""/>
+</con:parameters>
+          <con:parameterOrder><con:entry>processId</con:entry><con:entry>shortTitle</con:entry><con:entry>journal</con:entry><con:entry>areaOfResearch</con:entry><con:entry>funding</con:entry><con:entry>fundingOrganization</con:entry><con:entry>articleType</con:entry><con:entry>longTitle</con:entry><con:entry>id</con:entry><con:entry>firstName</con:entry><con:entry>lastName</con:entry><con:entry>email</con:entry><con:entry>institution</con:entry><con:entry>department</con:entry><con:entry>county</con:entry></con:parameterOrder></con:restRequest>
         </con:config>
-      </con:testStep>
-      <con:properties>
+      </con:testStep><con:properties>
         <con:property>
           <con:name>processId</con:name>
           <con:value>7673</con:value>
