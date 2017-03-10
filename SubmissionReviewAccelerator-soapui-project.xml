@@ -578,7 +578,7 @@
           </con:request>
         </con:method>
       </con:resource>
-    </con:resource>
+    <con:resource name="Manage Submission" path="submission-manage/" id="68a3adfa-704d-4ed1-bcac-68a82af9a5df"><con:settings/><con:parameters><con:parameter><con:name>processId</con:name><con:value>processId</con:value><con:style>TEMPLATE</con:style><con:default>processId</con:default></con:parameter><con:parameter><con:name>userId</con:name><con:value>userId</con:value><con:style>TEMPLATE</con:style><con:default>userId</con:default></con:parameter></con:parameters><con:resource name="Get Manage Submission by ProcessId" path="{processId}" id="1d94ade9-11eb-4afb-b8da-ae837a4dc73f"><con:settings/><con:parameters><con:parameter><con:name>processId</con:name><con:value>processId</con:value><con:style>TEMPLATE</con:style><con:default>processId</con:default></con:parameter></con:parameters><con:resource name="Claim Submission" path="claim/{userId}" id="fcd2cea7-0846-4dff-85aa-81ffa23f0059"><con:settings/><con:parameters><con:parameter><con:name>userId</con:name><con:value>userId</con:value><con:style>TEMPLATE</con:style><con:default>userId</con:default></con:parameter></con:parameters><con:method name="PUT" id="e134aad2-a93c-4e17-bb70-e8ca77ff2ddf" method="PUT"><con:settings/><con:parameters/><con:request name="Claim Submission" id="4fcd6f8c-6533-4fd2-80f3-b83f49bbac7b" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GET" id="c86d83b4-66db-4060-b622-b63303f29750" method="GET"><con:settings/><con:parameters/><con:request name="GET Manage Submission by ProcessId" id="046411b5-acd5-4d1a-b815-4cef895a50e2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GET" id="145ff862-f0e7-4b28-85d1-7ef467e5504c" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Get Manage Submission" id="14d8f676-48fe-44b4-a801-04a1fa56d5d8" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint><con:request/><con:originalUri>http://praqa.ipm.ixxus.io/api/submission-manage/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder><con:entry>processId</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:resource>
   </con:interface>
   <con:testSuite id="ffb84568-d90d-422e-b8c6-238d6150a089" name="Login and set Global Auth Token">
     <con:settings/>
@@ -757,7 +757,7 @@ context.testCase.setPropertyValue("shortTitle","Is Rice Healthy?" + "-" + random
       <con:testStep type="restrequest" name="POST Generate Submission Id" id="dae11ee8-f172-41ca-93ab-b78831c80ff9">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
+          <con:restRequest name="POST Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -1426,18 +1426,18 @@ def extractInts = abs.findAll( /\d+/ )*.toInteger()
                 <codes>200</codes>
               </con:configuration>
             </con:assertion>
-            <con:credentials>
+            <con:assertion type="XPath Match" id="b8dde56a-181f-4a2a-8d41-8fbe4eefb524" name="XPath Match"><con:configuration><path>declare namespace sam='&lt;h2>Benefits of Health&lt;/h2>';</path><content>&lt;h2>Benefits of Health&lt;/h2></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials>
               <con:authType>No Authorization</con:authType>
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
-            <con:parameters><entry key="contentId" value="${#TestSuite#abstractId}" xmlns="http://eviware.com/soapui/config"/></con:parameters>
+            <con:parameters><entry key="contentId" value="59" xmlns="http://eviware.com/soapui/config"/></con:parameters>
           </con:restRequest>
         </con:config>
       </con:testStep><con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>7987</con:value>
+          <con:value>12682</con:value>
         </con:property>
         <con:property>
           <con:name>abstractId</con:name>
