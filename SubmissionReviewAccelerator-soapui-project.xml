@@ -3288,11 +3288,12 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
+              <con:entry key="id" value="soapUI.author@ixxus.com"/>
               <con:entry key="fundingOrganization" value="Ixxus"/>
               <con:entry key="funding" value="2017"/>
-              <con:entry key="county" value="Cluj"/>
-              <con:entry key="processId" value="${#TestCase#processId}"/>
               <con:entry key="shortTitle" value="${#TestSuite#shortTitle}"/>
+              <con:entry key="processId" value="${#TestCase#processId}"/>
+              <con:entry key="county" value="Cluj"/>
               <con:entry key="department" value="QA"/>
               <con:entry key="articleType" value="Review Article"/>
               <con:entry key="institution" value="Ixxus Office"/>
@@ -3583,11 +3584,12 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:jmsPropertyConfig/>
             <con:parameters>
+              <con:entry key="id" value="soapUI.author@ixxus.com"/>
               <con:entry key="fundingOrganization" value="Ixxus"/>
               <con:entry key="funding" value="2017"/>
-              <con:entry key="county" value="Cluj"/>
-              <con:entry key="processId" value="${#TestCase#processId}"/>
               <con:entry key="shortTitle" value="${#TestSuite#shortTitle1}"/>
+              <con:entry key="processId" value="${#TestCase#processId}"/>
+              <con:entry key="county" value="Cluj"/>
               <con:entry key="department" value="QA"/>
               <con:entry key="articleType" value="Review Article"/>
               <con:entry key="institution" value="Ixxus Office"/>
