@@ -826,6 +826,18 @@
                 <con:params/>
                 <con:element>data</con:element>
               </con:representation>
+              <con:representation type="RESPONSE">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>200</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+              </con:representation>
+              <con:representation type="RESPONSE">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>200</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+              </con:representation>
               <con:request name="Claim Submission" id="4fcd6f8c-6533-4fd2-80f3-b83f49bbac7b" mediaType="application/json" postQueryString="false">
                 <con:settings>
                   <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
@@ -3088,6 +3100,50 @@ assert !(jsonSlurper.isEmpty())</scriptText>
     <con:runType>SEQUENTIAL</con:runType>
     <con:testCase id="73f01efa-6e95-4860-a219-a07243a64d9a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Precondition: Create Submission using different user than the editor" searchProperties="true">
       <con:settings/>
+      <con:testStep type="restrequest" name="POST - Login as an Author user" id="ca491920-85a7-49cb-9963-e501dfac03bb">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/auth" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="POST - Login as an Author user" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{
+  "username": "${username}",
+  "password": "${password}"
+}</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="223fcfca-f004-4cfd-8763-4e7644dedb36" name="Verify HTTP Status Code (200)">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="GroovyScriptAssertion" id="4c98d6ca-98f5-4b67-9ac0-384e8c75ccdb" name="Set Author user token">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+context.testCase.testSuite.setPropertyValue("AuthToken", jsonSlurper.token)</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <con:entry key="username" value="soapUI.author@ixxus.com"/>
+              <con:entry key="password" value="SoapUI123"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>username</con:entry>
+              <con:entry>password</con:entry>
+            </con:parameterOrder>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
       <con:testStep type="groovy" name="Set a random ShortTitle" id="368b35a8-7fa8-4280-b3df-14cca8156838">
         <con:settings/>
         <con:config>
@@ -3101,7 +3157,7 @@ context.testCase.testSuite.setPropertyValue("shortTitle","Is Rice Healthy?" + "-
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{}</con:request>
@@ -3135,7 +3191,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
@@ -3192,7 +3248,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{
@@ -3266,7 +3322,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/upload/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Upload File" id="0c77ebf9-4036-400a-9c0f-b37b6db6f962" mediaType="multipart/form-data" postQueryString="true">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
               <con:setting id="RecordRequestRepresentations">true</con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
@@ -3316,7 +3372,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}/submitDraft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Complete Submission" id="d03b4abb-9c1a-4641-86e9-4ff23b134bcd" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{
@@ -3373,7 +3429,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
       <con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>16710</con:value>
+          <con:value>21845</con:value>
         </con:property>
         <con:property>
           <con:name>shortTitle</con:name>
@@ -3383,50 +3439,6 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
     </con:testCase>
     <con:testCase id="2db62671-3917-4a5c-81ea-5994a4056875" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Precondition: Create Second Submission using editor user" searchProperties="true">
       <con:settings/>
-      <con:testStep type="restrequest" name="POST - Login as an Editor user" id="ca491920-85a7-49cb-9963-e501dfac03bb">
-        <con:settings/>
-        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/auth" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="POST - Login as an Editor user" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
-            <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
-            </con:settings>
-            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
-            <con:request>{
-  "username": "${username}",
-  "password": "${password}"
-}</con:request>
-            <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri>
-            <con:assertion type="Valid HTTP Status Codes" id="223fcfca-f004-4cfd-8763-4e7644dedb36" name="Valid HTTP Status Codes">
-              <con:configuration>
-                <codes>200</codes>
-              </con:configuration>
-            </con:assertion>
-            <con:assertion type="GroovyScriptAssertion" id="4c98d6ca-98f5-4b67-9ac0-384e8c75ccdb" name="Script Assertion">
-              <con:configuration>
-                <scriptText>import groovy.json.JsonSlurper
-def ResponseMessage = messageExchange.response.responseContent
-def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
-
-assert !(jsonSlurper.isEmpty())
-context.testCase.testSuite.setPropertyValue("Token", jsonSlurper.token)</scriptText>
-              </con:configuration>
-            </con:assertion>
-            <con:credentials>
-              <con:authType>No Authorization</con:authType>
-            </con:credentials>
-            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
-            <con:jmsPropertyConfig/>
-            <con:parameters>
-              <con:entry key="username" value="soapUI.editor@ixxus.com"/>
-              <con:entry key="password" value="SoapUI123"/>
-            </con:parameters>
-            <con:parameterOrder>
-              <con:entry>username</con:entry>
-              <con:entry>password</con:entry>
-            </con:parameterOrder>
-          </con:restRequest>
-        </con:config>
-      </con:testStep>
       <con:testStep type="groovy" name="Set a random ShortTitle" id="a1b9b69a-c44a-4004-9ad5-6f88dec8e7cd">
         <con:settings/>
         <con:config>
@@ -3440,7 +3452,7 @@ context.testCase.testSuite.setPropertyValue("shortTitle1","Is Rice Healthy?" + "
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Generate Submission Id" id="382ffb17-d0c8-4444-9488-b0cf91ab88a3" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{}</con:request>
@@ -3474,7 +3486,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="GET Submission by ProcessId" id="48ee19b7-3968-4db6-9a6b-9cb9329702c2" mediaType="application/json">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request/>
@@ -3531,7 +3543,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Update Submission" id="51854bad-6b78-4158-89d3-0279913fe66f" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{
@@ -3605,7 +3617,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/upload/{processId}" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Upload File" id="0c77ebf9-4036-400a-9c0f-b37b6db6f962" mediaType="multipart/form-data" postQueryString="true">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
               <con:setting id="RecordRequestRepresentations">true</con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
@@ -3655,7 +3667,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-draft/{processId}/submitDraft" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
           <con:restRequest name="POST Complete Submission" id="d03b4abb-9c1a-4641-86e9-4ff23b134bcd" mediaType="application/json" postQueryString="false">
             <con:settings>
-              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#AuthToken}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
             <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
             <con:request>{
@@ -3712,7 +3724,7 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
       <con:properties>
         <con:property>
           <con:name>processId</con:name>
-          <con:value>16837</con:value>
+          <con:value>17350</con:value>
         </con:property>
         <con:property>
           <con:name>shortTitle</con:name>
@@ -3722,10 +3734,54 @@ context.testCase.setPropertyValue("processId", jsonSlurper.processId.toString())
     </con:testCase>
     <con:testCase id="b502c91a-5193-4c52-b091-8c5a43ef40c0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="GET- unclaimed and claimed submissions" searchProperties="true">
       <con:settings/>
+      <con:testStep type="restrequest" name="POST - Login as an Editor user" id="c2ba6d0f-242a-40a9-835b-db13ac3d451b">
+        <con:settings/>
+        <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/auth" methodName="POST" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:restRequest name="Copy of POST - Login as an Author user" id="ecb81047-4eba-42b9-a11d-bfb889105f98" mediaType="application/json" postQueryString="false">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:endpoint>http://praqa.ipm.ixxus.io</con:endpoint>
+            <con:request>{
+  "username": "${username}",
+  "password": "${password}"
+}</con:request>
+            <con:originalUri>http://praqa.ipm.ixxus.io/auth</con:originalUri>
+            <con:assertion type="Valid HTTP Status Codes" id="223fcfca-f004-4cfd-8763-4e7644dedb36" name="Verify HTTP Status Code (200)">
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="GroovyScriptAssertion" id="4c98d6ca-98f5-4b67-9ac0-384e8c75ccdb" name="Set Author user token">
+              <con:configuration>
+                <scriptText>import groovy.json.JsonSlurper
+def ResponseMessage = messageExchange.response.responseContent
+def jsonSlurper = new JsonSlurper().parseText(ResponseMessage)
+
+assert !(jsonSlurper.isEmpty())
+context.testCase.testSuite.setPropertyValue("AuthToken", jsonSlurper.token)</scriptText>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:jmsPropertyConfig/>
+            <con:parameters>
+              <con:entry key="username" value="soapUI.editor@ixxus.com"/>
+              <con:entry key="password" value="SoapUI123"/>
+            </con:parameters>
+            <con:parameterOrder>
+              <con:entry>username</con:entry>
+              <con:entry>password</con:entry>
+            </con:parameterOrder>
+          </con:restRequest>
+        </con:config>
+      </con:testStep>
       <con:testStep type="restrequest" name="GET - Verify Editor user can see both submissions created in Preconditions 1" id="7f0c2c18-0cd9-45c3-ab9a-c0cfb618e880">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-manage" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="GET - Get Manage Submission" id="14d8f676-48fe-44b4-a801-04a1fa56d5d8" mediaType="application/json">
+          <con:restRequest name="GET - Verify Editor user can see both submissions created in Preconditions 1" id="14d8f676-48fe-44b4-a801-04a1fa56d5d8" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#Token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -3844,7 +3900,7 @@ context.testCase.testSuite.setPropertyValue("processIdS2", jsonSlurper[0].proces
       <con:testStep type="restrequest" name="GET - Verify Editor user cannot see the submission claimed by other user" id="b87bf2f9-c839-456c-b479-8738c2ff5183">
         <con:settings/>
         <con:config service="http://praqa.ipm.ixxus.io" resourcePath="/api/submission-manage" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-          <con:restRequest name="Copy of GET - Second Submission and Set ProcessId" id="14d8f676-48fe-44b4-a801-04a1fa56d5d8" mediaType="application/json">
+          <con:restRequest name="GET - Verify Editor user cannot see the submission claimed by other user" id="14d8f676-48fe-44b4-a801-04a1fa56d5d8" mediaType="application/json">
             <con:settings>
               <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Authorization" value="${#TestSuite#Token}" xmlns="http://eviware.com/soapui/config"/></con:setting>
             </con:settings>
@@ -4002,23 +4058,27 @@ assert jsonSlurper.size() == 1</scriptText>
     <con:properties>
       <con:property>
         <con:name>Token</con:name>
-        <con:value>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzb2FwVUkuZWRpdG9yQGl4eHVzLmNvbSIsImF1ZCI6IndlYiIsImNyZWF0ZWQiOjE0ODkxNTIwODIyNzgsImV4cCI6MTQ4OTc1Njg4Mn0.JIAf2snF6A0vcwGeiY1xGQS8P2tI3hTBiWCKnFz4_BHKP6_J8Rzm927rKJLx0-h1g7BIF_ORPr5VFDs7QQi-zw</con:value>
+        <con:value>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzb2FwVUkuZWRpdG9yQGl4eHVzLmNvbSIsImF1ZCI6IndlYiIsImNyZWF0ZWQiOjE0ODkxNTU4NjQ1NDUsImV4cCI6MTQ4OTc2MDY2NH0.Dt9mzl6HyHTx1qJ5VZSe5hPv-cTMxzWh2AuPrckXatdoWJZNiQsS_BOAT0OP7hMFN5XwGrZXbGKFknU3jkFVsA</con:value>
       </con:property>
       <con:property>
         <con:name>shortTitle</con:name>
-        <con:value>Is Rice Healthy?-2793</con:value>
+        <con:value>Is Rice Healthy?-7190</con:value>
       </con:property>
       <con:property>
         <con:name>shortTitle1</con:name>
-        <con:value>Is Rice Healthy?-2122</con:value>
+        <con:value>Is Rice Healthy?-2952</con:value>
       </con:property>
       <con:property>
         <con:name>processIdS2</con:name>
-        <con:value>16863</con:value>
+        <con:value>17376</con:value>
       </con:property>
       <con:property>
         <con:name>processIdS1</con:name>
-        <con:value>16736</con:value>
+        <con:value>17249</con:value>
+      </con:property>
+      <con:property>
+        <con:name>AuthToken</con:name>
+        <con:value>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzb2FwVUkuYXV0aG9yQGl4eHVzLmNvbSIsImF1ZCI6IndlYiIsImNyZWF0ZWQiOjE0ODk0MDEyOTc5ODYsImV4cCI6MTQ5MDAwNjA5N30.m_96errsqT0HRHq8rIzZFk3w7mDgy7csoj2vU9R5NkWMSKIEoptbUEcWiexJ15NmUBBigKdwxwEhV7qrtufMYA</con:value>
       </con:property>
     </con:properties>
   </con:testSuite>
